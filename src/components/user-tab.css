@@ -1,0 +1,34 @@
+.tab-container {
+    display: flex;
+    border: 1px solid gray;
+    align-items: center;
+    padding: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: white;
+}
+
+.avatar {
+    flex: 0 0 20%;
+}
+.avatar .circle {
+    overflow: hidden;
+}
+.avatar img {
+    max-width: 100%;
+}
+
+.circle {
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.description {
+    flex: 0 0 60%;
+}
+
+.time {
+    flex: 0 0 20%;
+}
