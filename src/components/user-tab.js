@@ -9,7 +9,7 @@ class UserTab extends Component {
     state = {}
     render() {
         return (
-            <Link to={`/messanger/${this.props.conversation}`}>
+            <Link to={`/messanger/${this.props.conversation}/${this.props.user._id}`}>
                 <div className="tab-container">
                     <div className="avatar"><div className="circle"><img src={this.props.user.profile_pic} alt="" /></div></div>
                     <div className="description">

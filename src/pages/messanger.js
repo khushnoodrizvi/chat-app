@@ -29,7 +29,6 @@ class Messanger extends Component {
         return ( 
             <div className="container">
                 <h1>Welcome to Messanger</h1>
-                <button onClick={this.handleClick}>Click me</button>
                 <Users></Users>
             </div>
          );

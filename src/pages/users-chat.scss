@@ -57,16 +57,12 @@ hr{
 	
 	position:relative;
 
-	background-image:url('https://i.imgur.com/TrT3LoO.jpg');
-	background-size:cover;
-	background-repeat:no-repeat;
-	background-position:center;
+	// background-image:url('https://i.imgur.com/TrT3LoO.jpg');
+	// background-size:cover;
+	// background-repeat:no-repeat;
+	// background-position:center;
 
 	border-radius:50%;
-
-	&.avatar{
-			--size:3em;
-		}
 	&.photo{
 			--size:6em;
 		.online{
@@ -87,6 +83,12 @@ hr{
 
 		background:#09db84;
 		border-radius:50%;
+	}
+
+	img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
 	}
 }
 
@@ -132,7 +134,7 @@ hr{
 	
 	.conversation{
 		width:100%;
-		height:100%;
+		height:500px;
 		
 		display:flex;
 		flex-direction:column;

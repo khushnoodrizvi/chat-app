@@ -11,7 +11,6 @@ exports.signIn = async (req, res, next) => {
         else {
             if(user.validPassword(req.body.password)){
                 req.session.user = user;
-                console.log(req.session);
                 req.session.isLoggedIn = true;
                 return req.session.save((err)=>{
                     // res.send({message: "some error"})

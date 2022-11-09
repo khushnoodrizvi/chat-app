@@ -4,7 +4,8 @@ const messageSchema = require('../models/message.model');
 exports.conversationSchema = async (req, res, next) => {
     if(req.body.conversation_id){
         const message = new messageSchema({
-            ...req.body
+            ...req.body,
+            sender_id: req.user._id
         })
         try {
             const messageSaved = await message.save()
@@ -40,7 +41,6 @@ exports.conversationSchema = async (req, res, next) => {
 
 exports.getAllConversations = async (req, res, next) => {
     try {
-        console.log(req.user)
         const conversation = await conversationSchema.find()
         .or([{ user1_id: req.user._id}, {user2_id: req.user._id}])
         .populate({ path: "user1_id", match: { _id: { $ne : req.user._id }}})

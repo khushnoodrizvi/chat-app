@@ -23,7 +23,7 @@ function App() {
             </Route>
             <Route path='messanger' element={<Messanger></Messanger>}>
             </Route>
-            <Route path='messanger/:id' element={<UsersChat></UsersChat>} ></Route>
+            <Route path='messanger/:id/:user_id' element={<UsersChat></UsersChat>} ></Route>
           </Routes>
         </BrowserRouter>
       </ErrorBoundry>
