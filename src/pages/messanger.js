@@ -4,6 +4,7 @@ import "./messanger.css"
 import axios from 'axios'
 import { connect } from 'react-redux';
 import { setUser } from "../store/reducers/rootReducers"
+const io = require('socket.io-client')
 class Messanger extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +18,11 @@ class Messanger extends Component {
             console.log(res);
             this.props.setUser(res.data);
         })
+
+        const socket = io("http://localhost:5000");
+        socket.on("connect", () => {
+            console.log("socket connected!");
+        });
     }
 
     handleClick(){

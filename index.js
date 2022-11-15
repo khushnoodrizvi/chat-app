@@ -1,7 +1,8 @@
 const handle = require('./app/server')
-const socket  = require('./app/common/socket')
+const socket  = require('./app/common/socket');
+// const socketJob = require('./app/common/socketJobs')
 const httpServer = require("http").createServer(handle)
-socket.connect(httpServer)
+socket.connect(httpServer);
 // const io = require("socket.io")(httpServer, {
 //   cors: {
 //     origin: "http://localhost:5001",
@@ -19,6 +20,12 @@ const port = process.env.PORT || 3000
 //     socket.emit('recieve-msg', msg)
 //   })
 // });
+
+// let connection = socket.connection();
+// if(connection?.socket){
+//   connection.emit('recieve-msg', "msg from server");
+// }
+
 httpServer.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

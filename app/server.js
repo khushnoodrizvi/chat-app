@@ -9,6 +9,7 @@ const users = require('./routes/router')
 const conversations = require('./routes/conversation.router')
 const auth = require('./routes/auth.router')
 const User = require('./models/users.model')
+
 const app = express()
 
 mongoose.connect(process.env.DATABASE_URL);
@@ -49,8 +50,6 @@ app.use((req, res, next) => {
 app.use('/auth',auth)
 app.use('/users',users)
 app.use('/conversations',conversations)
-
-// const io = new Server(httpServer, { /* options */ });
 
 
 

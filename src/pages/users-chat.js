@@ -42,7 +42,7 @@ class UsersChat extends Component {
     axios.post('http://localhost:5000/conversations', payload, { withCredentials: true})
     .then(res => {
       this.state.socket.emit('sendMsgToServer', this.state.msg)
-      this.setState({ chat: [...this.state.chat, res.data], msg: "" });
+      
     })
   }
 
@@ -62,9 +62,19 @@ class UsersChat extends Component {
     this.setState({socket: socket})
     socket.on("connect", () => {
       console.log(this.state.socket.id);
+      socket.emit('joinUser', { conversation_id: this.props.params.id })
     });
     socket.on("recieve-msg", (msg) => {
-      console.log(msg); 
+      this.setState({ chat: [...this.state.chat, msg], msg: "" });
+      setTimeout(() => {
+        const theElement = document.getElementById('messages');
+
+        const scrollToBottom = (node) => {
+          node.scrollTop = node.scrollHeight;
+        }
+
+        scrollToBottom(theElement); // The specified node scrolls to the bottom.
+              }, 0)
     });
     this.getUserDetails()
     axios

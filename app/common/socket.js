@@ -1,20 +1,32 @@
 let connection = null;
 
 class Socket {
+  socket;
   
   constructor() {
     this.socket = null;
   }
   connect(server) {
-    const io = require("socket.io")(server, {
-        cors: {
-            origin: "http://localhost:5001",
-            methods: ["GET", "POST"]
-        }
-    });
-    io.on("connection", (socket) => {
-       this.socket = socket;
-    });
+    try {
+        const io = require("socket.io")(server, {
+            cors: {
+                origin: "http://localhost:5001",
+                methods: ["GET", "POST"]
+            }
+        });
+        io.on("connection", (socket) => {
+           this.socket = socket;
+           socket.on("joinUser", data => {
+            console.log("joinded user");
+            socket.join(data.conversation_id)
+           })
+           socket.on('sendMsgToServer', msg => {
+            console.log('------my msg',msg);
+           })
+        });
+    } catch (error) {
+        console.log(error);
+    }
   }
   emit(event, data) {
     this.socket.emit(event, data);
@@ -31,7 +43,7 @@ class Socket {
     }
   }
 }
-module.exports =  {
+module.exports = {
   connect: Socket.init,
   connection: Socket.getConnection
 }

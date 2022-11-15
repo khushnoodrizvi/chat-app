@@ -1,3 +1,4 @@
+const socket = require('../common/socket');
 const conversationSchema = require('../models/conversation.model');
 const messageSchema = require('../models/message.model');
 
@@ -9,6 +10,10 @@ exports.conversationSchema = async (req, res, next) => {
         })
         try {
             const messageSaved = await message.save()
+            let connection = socket.connection();
+            if(connection?.socket){
+              connection.socket.to(req.body.conversation_id).emit('recieve-msg', messageSaved);
+            }
             res.status(201).json(messageSaved)
         } catch (error) {
             res.status(400).json({ message: error.message })
