@@ -58,23 +58,21 @@ class UsersChat extends Component {
   }
 
   componentDidMount() {
+    const theElement = document.getElementById('messages');
+    const scrollToBottom = (node) => {
+      node.scrollTop = node.scrollHeight;
+    }
+    
     const socket = io("http://localhost:5000");
     this.setState({socket: socket})
     socket.on("connect", () => {
-      console.log(this.state.socket.id);
       socket.emit('joinUser', { conversation_id: this.props.params.id })
     });
     socket.on("recieve-msg", (msg) => {
       this.setState({ chat: [...this.state.chat, msg], msg: "" });
       setTimeout(() => {
-        const theElement = document.getElementById('messages');
-
-        const scrollToBottom = (node) => {
-          node.scrollTop = node.scrollHeight;
-        }
-
-        scrollToBottom(theElement); // The specified node scrolls to the bottom.
-              }, 0)
+        scrollToBottom(theElement);
+      }, 0)
     });
     this.getUserDetails()
     axios
@@ -84,6 +82,9 @@ class UsersChat extends Component {
       )
       .then((res) => {
         this.setState({ chat: res.data });
+        setTimeout(() => {
+          scrollToBottom(theElement);
+        }, 0)
       });
   }
   render() {

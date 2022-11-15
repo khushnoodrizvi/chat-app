@@ -15,7 +15,6 @@ class Messanger extends Component {
     componentDidMount(){
         axios.get('http://localhost:5000/auth/logged-in-user', { withCredentials: true})
         .then(res => {
-            console.log(res);
             this.props.setUser(res.data);
         })
 
@@ -31,7 +30,6 @@ class Messanger extends Component {
     
 
     render() { 
-        console.log(this.props.count.user)
         return ( 
             <div className="container">
                 <h1>Welcome to Messanger</h1>
