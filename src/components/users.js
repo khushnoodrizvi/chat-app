@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserTab from './user-tab';
 import "./users.css"
-import axios from 'axios'
+import axiosInstance from '../util/axiosConfig';
 class Users extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +11,7 @@ class Users extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/conversations', { withCredentials: true})
+        axiosInstance.get('/conversations', { withCredentials: true})
         .then(res => {
             console.log(res);
             this.setState({

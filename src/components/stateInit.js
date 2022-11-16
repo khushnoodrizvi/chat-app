@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'
+import { Navigate } from 'react-router-dom';
 import { setUser } from "../store/reducers/rootReducers"
+import axiosInstance from '../util/axiosConfig';
 
 class stateInit extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class stateInit extends Component {
     state = {  }
 
     componentDidMount(){
-        axios.get('http://localhost:5000/auth/logged-in-user', { withCredentials: true})
+        axiosInstance.get('/auth/logged-in-user', { withCredentials: true})
         .then(res => {
             console.log(res);
             this.props.setUser(res.data);
@@ -18,7 +19,9 @@ class stateInit extends Component {
     }
     render() { 
         return (
-            <div></div>
+            <>
+            
+            </>
         )
     }
 }

@@ -1,9 +1,9 @@
 import { Component } from "react";
 import withRouter from "../util/withRouter";
-import axios from "axios";
 import "./users-chat.scss";
 import { connect } from "react-redux";
 import sendImg from "../assets/images/send_icon.svg"
+import axiosInstance from "../util/axiosConfig";
 const io = require('socket.io-client')
 // import { io } from "socket.io-client"
 
@@ -39,7 +39,7 @@ class UsersChat extends Component {
       message: this.state.msg,
       conversation_id: this.props.params.id
     }
-    axios.post('http://localhost:5000/conversations', payload, { withCredentials: true})
+    axiosInstance.post('/conversations', payload, { withCredentials: true})
     .then(res => {
       this.state.socket.emit('sendMsgToServer', this.state.msg)
       
@@ -47,9 +47,9 @@ class UsersChat extends Component {
   }
 
   getUserDetails(){
-    axios
+    axiosInstance
       .get(
-        `http://localhost:5000/users/${this.props.params.user_id}`,
+        `/users/${this.props.params.user_id}`,
         { withCredentials: true }
       )
       .then((res) => {
@@ -75,9 +75,9 @@ class UsersChat extends Component {
       }, 0)
     });
     this.getUserDetails()
-    axios
+    axiosInstance
       .get(
-        `http://localhost:5000/conversations/messages/${this.props.params.id}`,
+        `/conversations/messages/${this.props.params.id}`,
         { withCredentials: true }
       )
       .then((res) => {

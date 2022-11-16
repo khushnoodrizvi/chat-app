@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Users from '../components/users';
 import "./messanger.css"
-import axios from 'axios'
 import { connect } from 'react-redux';
 import { setUser } from "../store/reducers/rootReducers"
+import axiosInstance from '../util/axiosConfig';
 const io = require('socket.io-client')
 class Messanger extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Messanger extends Component {
     
     state = {  }
     componentDidMount(){
-        axios.get('http://localhost:5000/auth/logged-in-user', { withCredentials: true})
+        axiosInstance.get('/auth/logged-in-user', { withCredentials: true})
         .then(res => {
             this.props.setUser(res.data);
         })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./login.css"
-import axios from 'axios'
 import { Navigate } from "react-router-dom";
+import axiosInstance from '../util/axiosConfig';
 
 class Login extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post('http://localhost:5000/auth/login', payload, { withCredentials: true})
+        axiosInstance.post('/auth/login', payload, { withCredentials: true})
         .then(res => {
             console.log(this.state.loginSuccess,'============');
             this.setState({ loginSuccess: true })
