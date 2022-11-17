@@ -63,7 +63,7 @@ class UsersChat extends Component {
       node.scrollTop = node.scrollHeight;
     }
     
-    const socket = io("http://localhost:5000");
+    const socket = io("https://kkchatapp.herokuapp.com/");
     this.setState({socket: socket})
     socket.on("connect", () => {
       socket.emit('joinUser', { conversation_id: this.props.params.id })

@@ -18,7 +18,7 @@ class Messanger extends Component {
             this.props.setUser(res.data);
         })
 
-        const socket = io("http://localhost:5000");
+        const socket = io("https://kkchatapp.herokuapp.com");
         socket.on("connect", () => {
             console.log("socket connected!");
         });
