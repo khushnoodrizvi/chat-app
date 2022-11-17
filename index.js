@@ -26,6 +26,12 @@ const port = process.env.PORT || 3000
 //   connection.emit('recieve-msg', "msg from server");
 // }
 
+app.use(express.static(path.join(__dirname, "/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/build', 'index.html'));
+});
+
 httpServer.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
