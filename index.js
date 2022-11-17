@@ -1,5 +1,7 @@
 const handle = require('./app/server')
 const socket  = require('./app/common/socket');
+const express = require('express')
+const path = require('path')
 // const socketJob = require('./app/common/socketJobs')
 const httpServer = require("http").createServer(handle)
 socket.connect(httpServer);
@@ -26,9 +28,9 @@ const port = process.env.PORT || 3000
 //   connection.emit('recieve-msg', "msg from server");
 // }
 
-app.use(express.static(path.join(__dirname, "/build")));
+handle.use(express.static(path.join(__dirname, "/build")));
 
-app.get('*', (req, res) => {
+handle.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/build', 'index.html'));
 });
 
