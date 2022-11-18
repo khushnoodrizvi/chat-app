@@ -1,7 +1,8 @@
 const handle = require('./app/server')
 const socket  = require('./app/common/socket');
 const express = require('express')
-const path = require('path')
+const path = require('path');
+const { PORT } = require('./app/common/config');
 // const socketJob = require('./app/common/socketJobs')
 const httpServer = require("http").createServer(handle)
 socket.connect(httpServer);
@@ -11,8 +12,7 @@ socket.connect(httpServer);
 //     methods: ["GET", "POST"]
 //   }
 // });
-require('dotenv').config()
-const port = process.env.PORT || 3000
+const port = PORT || 3000
 
 
 // io.on("connection", (socket) => {
