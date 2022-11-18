@@ -18,7 +18,7 @@ class Messanger extends Component {
             this.props.setUser(res.data);
         })
 
-        const socket = io("http://localhost:5000");
+        const socket = io(process.env.REACT_APP_API_BASE_URL);
         socket.on("connect", () => {
             console.log("socket connected!");
         });
