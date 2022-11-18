@@ -42,6 +42,14 @@ class UsersChat extends Component {
     axiosInstance.post('/conversations', payload, { withCredentials: true})
     .then(res => {
       this.state.socket.emit('sendMsgToServer', this.state.msg)
+      this.setState({ chat: [...this.state.chat, res.data], msg: "" });
+      const theElement = document.getElementById('messages');
+      const scrollToBottom = (node) => {
+      node.scrollTop = node.scrollHeight;
+    }
+      setTimeout(() => {
+        scrollToBottom(theElement);
+      }, 0)
       
     })
   }
@@ -63,7 +71,7 @@ class UsersChat extends Component {
       node.scrollTop = node.scrollHeight;
     }
     
-    const socket = io("https://kkchatapp.herokuapp.com");
+    const socket = io(process.env.REACT_APP_API_BASE_URL);
     this.setState({socket: socket})
     socket.on("connect", () => {
       socket.emit('joinUser', { conversation_id: this.props.params.id })
@@ -153,8 +161,8 @@ class UsersChat extends Component {
 
             <div id="messages" className="messages">
               <div className="time">Today</div>
-              {this.state.chat.map((chat) => (
-                <div className={this.msgClass(chat.sender_id)} key={chat._id}>
+              {this.state.chat.map((chat, index) => (
+                <div className={this.msgClass(chat.sender_id)} key={chat._id+""+index}>
                   <span className="text">{chat.message}</span>
                 </div>
               ))}

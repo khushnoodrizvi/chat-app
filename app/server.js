@@ -4,18 +4,18 @@ var cors = require('cors')
 const bodyParser = require('body-parser');
 const sessions = require('express-session')
 const mongoDBStrore = require('connect-mongodb-session')(sessions)
-require('dotenv').config()
 const users = require('./routes/router')
 const conversations = require('./routes/conversation.router')
 const auth = require('./routes/auth.router')
-const User = require('./models/users.model')
+const User = require('./models/users.model');
+const { DATABASE_URL } = require('./common/config');
 
 const app = express()
 
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect(DATABASE_URL);
 
 const store = new mongoDBStrore({
-  uri: process.env.DATABASE_URL,
+  uri: DATABASE_URL,
   collection: "sessions"
 });
 
