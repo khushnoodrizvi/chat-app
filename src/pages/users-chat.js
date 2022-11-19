@@ -42,14 +42,15 @@ class UsersChat extends Component {
     axiosInstance.post('/conversations', payload, { withCredentials: true})
     .then(res => {
       this.state.socket.emit('sendMsgToServer', this.state.msg)
-      this.setState({ chat: [...this.state.chat, res.data], msg: "" });
-      const theElement = document.getElementById('messages');
-      const scrollToBottom = (node) => {
-      node.scrollTop = node.scrollHeight;
-    }
-      setTimeout(() => {
-        scrollToBottom(theElement);
-      }, 0)
+      this.setState({ msg: "" });
+      // this.setState({ chat: [...this.state.chat, res.data], msg: "" });
+    //   const theElement = document.getElementById('messages');
+    //   const scrollToBottom = (node) => {
+    //   node.scrollTop = node.scrollHeight;
+    // }
+    //   setTimeout(() => {
+    //     scrollToBottom(theElement);
+    //   }, 0)
       
     })
   }
