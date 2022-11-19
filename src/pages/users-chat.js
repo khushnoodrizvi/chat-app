@@ -23,6 +23,7 @@ class UsersChat extends Component {
     this.msgClass = this.msgClass.bind(this);
     this.onMsgSubmit = this.onMsgSubmit.bind(this)
     this.msgType = this.msgType.bind(this)
+    this.removeFromRoom = this.removeFromRoom.bind(this)
     
   }
   msgClass(id) {
@@ -66,12 +67,26 @@ class UsersChat extends Component {
       });
   }
 
+  removeFromRoom(e){
+    console.log('reoving rooom');
+    e.preventDefault()
+    e.returnValue = ''
+  }
+
+  leavingPage(){
+    window.addEventListener('beforeunload', this.removeFromRoom)
+    return () => {
+      window.removeEventListener('beforeunload', this.removeFromRoom)
+    }
+  }
+
   componentDidMount() {
     const theElement = document.getElementById('messages');
     const scrollToBottom = (node) => {
       node.scrollTop = node.scrollHeight;
     }
     
+    this.leavingPage();
     const socket = io(process.env.REACT_APP_API_BASE_URL);
     this.setState({socket: socket})
     socket.on("connect", () => {
