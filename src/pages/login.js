@@ -29,7 +29,6 @@ class Login extends Component {
         }
         axiosInstance.post('/auth/login', payload, { withCredentials: true})
         .then(res => {
-            console.log(this.state.loginSuccess,'============');
             this.setState({ loginSuccess: true })
         })
     }
