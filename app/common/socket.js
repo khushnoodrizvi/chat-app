@@ -14,7 +14,13 @@ class Socket {
                 methods: ["GET", "POST"]
             }
         });
-        io.on("connection", (socket) => {
+        io.on("connection", async (socket) => {
+
+          console.log('connected clients********', io.engine.clientsCount);
+          const inst = await io.fetchSockets()
+          console.log("socket instances =========", inst.length);
+          console.log("socket id =========", socket.id);
+          console.log("socket room =========", socket.rooms);
            this.socket = socket;
            socket.on("joinUser", data => {
             console.log("joinded user");
