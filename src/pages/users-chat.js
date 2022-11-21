@@ -73,20 +73,12 @@ class UsersChat extends Component {
     e.returnValue = ''
   }
 
-  leavingPage(){
-    window.addEventListener('beforeunload', this.removeFromRoom)
-    return () => {
-      window.removeEventListener('beforeunload', this.removeFromRoom)
-    }
-  }
-
   componentDidMount() {
     const theElement = document.getElementById('messages');
     const scrollToBottom = (node) => {
       node.scrollTop = node.scrollHeight;
     }
     
-    this.leavingPage();
     const socket = io(process.env.REACT_APP_API_BASE_URL);
     this.setState({socket: socket})
     socket.on("connect", () => {
@@ -112,6 +104,12 @@ class UsersChat extends Component {
         }, 0)
       });
   }
+
+  componentWillUnmount(){
+    console.log("unmounting ----- ");
+    this.state.socket && this.state.socket.emit('userLeaving', this.props.params.id)
+  }
+
   render() {
     return (
       <div>

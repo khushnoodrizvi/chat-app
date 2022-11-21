@@ -29,6 +29,9 @@ class Socket {
            socket.on('sendMsgToServer', msg => {
             console.log('------my msg',msg);
            })
+           socket.on('userLeaving', room => {
+            socket.leave(room)
+           })
         });
     } catch (error) {
         console.log(error);
