@@ -85,6 +85,7 @@ class UsersChat extends Component {
       socket.emit('joinUser', { conversation_id: this.props.params.id })
     });
     socket.on("recieve-msg", (msg) => {
+      console.log(msg,"----------msg recieved");
       this.setState({ chat: [...this.state.chat, msg], msg: "" });
       setTimeout(() => {
         scrollToBottom(theElement);
