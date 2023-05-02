@@ -11,7 +11,7 @@ exports.conversationSchema = async (req, res, next) => {
         try {
             const messageSaved = await message.save()
             let connection = socket.connection();
-            if(connection?.socket){
+            if(connection.socket){
               connection.socket.to(req.body.conversation_id).emit('recieve-msg', messageSaved);
             }
             res.status(201).json(messageSaved)
